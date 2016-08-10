@@ -7,7 +7,6 @@ use AppBundle\Entity\File;
 use AppBundle\Form\DirectoryType;
 use AppBundle\Form\FileType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -58,8 +57,11 @@ class DirectoryController extends Controller
         }
 
         $files = $this->getDoctrine()->getRepository('AppBundle:File')->findBy([
-            'directory' => $directory
-        ]);
+            'directory' => $directory,
+        ],
+            [
+                'name' => 'ASC'
+            ]);
 
         return $this->render('@App/index.html.twig', [
             'directory' => $directory,
@@ -77,7 +79,8 @@ class DirectoryController extends Controller
      * @param Directory|null $directory
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Request $request, Directory $directory = null){
+    public function editAction(Request $request, Directory $directory = null)
+    {
         $form = $this->createForm(DirectoryType::class, $directory);
         $form->handleRequest($request);
 

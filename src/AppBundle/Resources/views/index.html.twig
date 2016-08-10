@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="wrapper">
+    <div id="wrappera">
         <div id="container">
             <div class="container">
                 <div class="row">
@@ -20,6 +20,8 @@
                                 {% for directory in directories %}
                                     <li>
                                         <a href="{{ path('app_directory_list', { 'directory' : directory.id }) }}"> {{ directory.name }}</a>
+                                        &nbsp;|&nbsp;Files count: {{ directory.files | length }}
+                                        &nbsp;|&nbsp;Last modification: {{ directory.lastModification | date('Y-m-d H:i:s') }}
                                         <a class="btn btn-default"
                                            href="{{ path('app_directory_edit', { 'directory' : directory.id }) }}">Edit</a>
                                     </li>
@@ -35,7 +37,11 @@
                         <ul>
                             {% if files is defined %}
                                 {% for file in files %}
-                                    <li>{{ file.name }}</li>
+                                    <li>
+                                        {{ file.name }}
+                                        &nbsp;|&nbsp;Size: {{ file.size }}
+                                        &nbsp;|&nbsp;Last modification: {{ file.lastModification | date('Y-m-d H:i:s') }}
+                                    </li>
                                 {% endfor %}
                             {% else %}
                                 No files
@@ -112,7 +118,6 @@
             background: #FFF;
             margin: 1em auto;
             max-width: 800px;
-            width: 95%;
         }
 
         #container {
@@ -142,7 +147,6 @@
 
         @media (min-width: 768px) {
             #wrapper {
-                width: 80%;
                 margin: 2em auto;
             }
 

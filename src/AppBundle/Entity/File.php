@@ -27,6 +27,7 @@ class File
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\OrderBy({"name" = "ASC"})
      */
     private $name;
 
