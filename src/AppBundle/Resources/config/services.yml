@@ -2,3 +2,7 @@ services:
   app.directory:
     class: 'AppBundle\Service\DirectoryService'
     arguments: ['@doctrine.orm.entity_manager' ]
+
+  app.files:
+      class: 'AppBundle\Service\FileService'
+      arguments: ['@doctrine.orm.entity_manager', '%upload_dir%' ]

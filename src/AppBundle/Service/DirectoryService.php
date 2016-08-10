@@ -30,7 +30,7 @@ class DirectoryService
      *
      * @param string $name
      * @param Directory $parent
-     * @return bool
+     * @return Directory|bool
      */
     public function create($name, Directory $parent = null)
     {
@@ -46,7 +46,7 @@ class DirectoryService
             return false;
         }
 
-        return true;
+        return $directory;
     }
 
     /**

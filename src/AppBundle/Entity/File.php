@@ -3,12 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * File
  *
  * @ORM\Table(name="file")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FileRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class File
 {
@@ -38,7 +40,7 @@ class File
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="last_modification", type="datetimetz")
+     * @ORM\Column(name="last_modification", type="datetime")
      */
     private $lastModification;
 
@@ -47,6 +49,13 @@ class File
      * @ORM\JoinColumn(name="directory_id", referencedColumnName="id")
      */
     private $directory;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="size", type="integer")
+     */
+    private $size;
 
 
     /**
@@ -153,5 +162,39 @@ class File
     public function getDirectory()
     {
         return $this->directory;
+    }
+
+
+    /**
+     * Set size
+     *
+     * @param integer $size
+     *
+     * @return File
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    /**
+     * Get size
+     *
+     * @return integer
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setCreatedAtValue()
+    {
+        $this->lastModification = new \DateTime();
     }
 }
