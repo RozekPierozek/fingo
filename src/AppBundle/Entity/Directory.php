@@ -217,4 +217,8 @@ class Directory
     {
         $this->lastModification = new \DateTime();
     }
+
+    public function __toString() {
+        return $this->name;
+    }
 }

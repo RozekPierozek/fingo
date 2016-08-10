@@ -21,7 +21,8 @@
                                     <li>
                                         <a href="{{ path('app_directory_list', { 'directory' : directory.id }) }}"> {{ directory.name }}</a>
                                         &nbsp;|&nbsp;Files count: {{ directory.files | length }}
-                                        &nbsp;|&nbsp;Last modification: {{ directory.lastModification | date('Y-m-d H:i:s') }}
+                                        &nbsp;|&nbsp;Last
+                                        modification: {{ directory.lastModification | date('Y-m-d H:i:s') }}
                                         <a class="btn btn-default"
                                            href="{{ path('app_directory_edit', { 'directory' : directory.id }) }}">Edit</a>
                                     </li>
@@ -38,9 +39,12 @@
                             {% if files is defined %}
                                 {% for file in files %}
                                     <li>
-                                        {{ file.name }}
+                                        <a href="{{ path('app_file_download', { 'file': file.id}) }}"> {{ file.name }}</a>
                                         &nbsp;|&nbsp;Size: {{ file.size }}
-                                        &nbsp;|&nbsp;Last modification: {{ file.lastModification | date('Y-m-d H:i:s') }}
+                                        &nbsp;|&nbsp;Last
+                                        modification: {{ file.lastModification | date('Y-m-d H:i:s') }}
+                                        <a class="btn btn-default"
+                                           href="{{ path('app_file_edit', { 'file' : file.id }) }}">Edit</a>
                                     </li>
                                 {% endfor %}
                             {% else %}

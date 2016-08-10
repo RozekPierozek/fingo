@@ -37,7 +37,7 @@ class FileService
     /**
      * Create a new file
      *
-     * @param $UploadedFile
+     * @param UploadedFile $UploadedFile
      * @param Directory|null $directory
      * @return File|bool
      */
@@ -45,7 +45,7 @@ class FileService
     {
         $file = new File();
 
-        $file->setName($UploadedFile->getFilename())
+        $file->setName($UploadedFile->getClientOriginalName())
             ->setHash(md5($UploadedFile->getFilename()))
             ->setSize($UploadedFile->getSize())
             ->setDirectory($directory)
@@ -64,6 +64,28 @@ class FileService
         }
 
         return $file;
+    }
+
+    /**
+     *
+     * Edit file name
+     * @param File $edit
+     * @param string $newName
+     * @return bool
+     */
+    public function edit($edit, $newName)
+    {
+        $edit->setName($newName);
+
+        try {
+            $this->em->persist($edit);
+            $this->em->flush();
+        } catch (\Exception $e) {
+            // @todo log exception
+            return false;
+        }
+
+        return true;
     }
 
 }

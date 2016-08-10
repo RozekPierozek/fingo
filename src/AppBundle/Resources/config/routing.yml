@@ -9,3 +9,11 @@ app_directory_list:
 app_directory_edit:
     path:  /directory/edit/{directory}
     defaults: { _controller: AppBundle:Directory:edit}
+
+app_file_download:
+    path:  /file/get/{file}
+    defaults: { _controller: AppBundle:File:get}
+
+app_file_edit:
+    path:  /file/edit/{file}
+    defaults: { _controller: AppBundle:File:edit}
