@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="directory")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\DirectoryRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Directory
 {
@@ -206,5 +207,14 @@ class Directory
     public function getFiles()
     {
         return $this->files;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setCreatedAtValue()
+    {
+        $this->lastModification = new \DateTime();
     }
 }

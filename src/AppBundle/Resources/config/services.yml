@@ -1,0 +1,4 @@
+services:
+  app.directory:
+    class: 'AppBundle\Service\DirectoryService'
+    arguments: ['@doctrine.orm.entity_manager' ]

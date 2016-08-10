@@ -1,3 +1,11 @@
 home:
     path:  /
-    defaults: { _controller: AppBundle:Default:index}
+    defaults: { _controller: AppBundle:Default:index }
+
+app_directory_list:
+    path:  /directory/{directory}
+    defaults: { _controller: AppBundle:Directory:list, directory: null}
+
+app_directory_edit:
+    path:  /directory/edit/{directory}
+    defaults: { _controller: AppBundle:Directory:edit}

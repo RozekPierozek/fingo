@@ -4,51 +4,12 @@
     <div id="wrapper">
         <div id="container">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-5">
-                        <h2>Directories</h2>
-                        {% if directory is not null %}
-                            Current directory: {{ directory.name }}
-                            {% if directory.parent is not null %}
-                                <a href="{{ path('app_directory_list', {'directory': directory.parent.id}) }}">^UP^</a>
-                            {% else %}
-                                <a href="{{ path('app_directory_list', {'directory': null}) }}">^UP^</a>
-                            {% endif %}
-                        {% endif %}
-                        <ul>
-                            {% if directories is defined %}
-                                {% for directory in directories %}
-                                    <li>
-                                        <a href="{{ path('app_directory_list', { 'directory' : directory.id }) }}"> {{ directory.name }}</a>
-                                        <a class="btn btn-default"
-                                           href="{{ path('app_directory_edit', { 'directory' : directory.id }) }}">Edit</a>
-                                    </li>
-                                {% endfor %}
-                            {% else %}
-                                No directries
-                            {% endif %}
-                        </ul>
-                        <div>
-                            {{ form_start(directoryForm) }}
-                            {{ form_widget(directoryForm) }}
-                            {{ form_end(directoryForm) }}
-                        </div>
-                    </div>
-                    <div class="col-md-7">
-                        <h2>Files</h2>
-                        <ul>
-                            {% if files is defined %}
-                                {% for directory in directories %}
-                                    <li>{{ directory.name }}</li>
-                                {% endfor %}
-                            {% else %}
-                                No files
-                            {% endif %}
-                        </ul>
-                    </div>
+                <div>
+                    {{ form_start(directoryForm) }}
+                    {{ form_widget(directoryForm) }}
+                    {{ form_end(directoryForm) }}
                 </div>
             </div>
-
         </div>
     </div>
 {% endblock %}
